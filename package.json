@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@sheerun/mutationobserver-shim": "^0.3.3",
+    "@testing-library/cypress": "^7.0.3",
+    "cypress": "^6.5.0",
     "msw": "^0.21.3"
   }
 }
