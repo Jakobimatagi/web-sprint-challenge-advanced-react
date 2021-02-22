@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor  } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
 import userEvent from "@testing-library/user-event";
 
@@ -9,18 +9,18 @@ test("form header renders", () => {
     // const formHeader = screen.getByText(/Checkout Form/i)
     render(<CheckoutForm />)
     const header = screen.getByText(/Checkout Form/i);
-   
-    header.then((Element) => {
-        expect(Element).toBeVisible();
-    })
+    
+    
+        expect(header).toBeVisible();
+    
     
 
    
 });
 
 
-test("form shows success message on submit with form details", ()=> {
-
+test("form shows success message on submit with form details", async()=> {
+    
     //arrange
     render(<CheckoutForm />)
     const firstNameInput = screen.getByLabelText(/first name/i);
@@ -40,14 +40,13 @@ test("form shows success message on submit with form details", ()=> {
     userEvent.type(stateInput, 'utah');
     userEvent.type(zipInput, "84095");
 
-    userEvent.click(submitBtn);
+     userEvent.click(submitBtn);
 
     
-    //assert
-    const newOrder = screen.findByText(/You have ordered some plants! Woo-hoo!/i)
+    
+    const newOrder = await screen.findByText(/You have ordered some plants! Woo-hoo!/i)
 
-    newOrder.then((Element) => {
-        expect(Element).toBeVisible()
-    })
+    expect(newOrder).toBeTruthy()
+    
 
 })
